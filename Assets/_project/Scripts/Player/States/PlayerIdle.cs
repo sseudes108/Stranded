@@ -1,13 +1,17 @@
-using UnityEngine;
 
 public class PlayerIdle : IdleState {
     public override void EnterState(){
-        Player.Animation.ChangeAnimation(Player.IDLE);
+        Player.ChangeAnimation(Player.IDLE);
     }
 
     public override void LogicUpdate(){
+        Player.HandleJump();
         if (Player.Inputs.Move.x != 0){
-            Player.StateMachine.ChangeState(Player.RunState);
+            Player.ChangeState(Player.RunState);
         }
+    }
+
+    public override string ToString(){
+        return "Idle";
     }
 }
