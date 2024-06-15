@@ -5,4 +5,5 @@ public abstract class MachineController : MonoBehaviour {
     public abstract void ChangeAnimation(int animationHash);
     public abstract void HandleMovement(float direction);
     public abstract void HandleJump();
+    public abstract void HandleSpriteFlip();
 }

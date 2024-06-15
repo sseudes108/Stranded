@@ -10,6 +10,7 @@ public class Player : MachineController {
     public IdleState IdleState => StateMachine.IdleState;
     public RunState RunState => StateMachine.RunState;
     public JumpState JumpState => StateMachine.JumpState;
+    public PlayerStandShoot StandShoot;
 #endregion
 
 #region Animation
@@ -42,9 +43,13 @@ public class Player : MachineController {
 
     private void Update() {
         Testing.Instance.UpdateGrounded(IsGrounded());
+        HandleSpriteFlip();
     }
 
+#region State Machine
     private void CreateStates(){
+        StandShoot = new();
+
         StateMachine.SetStates(new StatesData{
             Idle = new PlayerIdle(),
             Run = new PlayerRun(),
@@ -52,6 +57,13 @@ public class Player : MachineController {
         });
     }
 
+    public override void ChangeState(Abstract newState){
+        Testing.Instance.UpdateState(newState);
+        StateMachine.ChangeState(newState);
+    }
+#endregion
+
+#region Movement, Jump and Ground Check
     public bool IsGrounded(){
         Collider2D isGrounded = Physics2D.OverlapBox(_groundCheckBox.position, _groundBoxSize, 0, LayerMask.GetMask("Ground"));
         return isGrounded;
@@ -62,23 +74,35 @@ public class Player : MachineController {
         Gizmos.DrawWireCube(_groundCheckBox.position, _groundBoxSize);
     }
 
-    public override void ChangeState(Abstract newState){
-        Testing.Instance.UpdateState(newState);
-        StateMachine.ChangeState(newState);
-    }
-
-    public override void ChangeAnimation(int animationHash){
-        Animation.ChangeAnimation(animationHash);
-    }
-
     public override void HandleMovement(float direction){
         Movement.SetDirection(direction);
     }
 
+    public void Jump(){
+        Movement.Jump(true);
+    }
+
     public override void HandleJump(){
         if (Inputs.Jump && IsGrounded()){
-            Movement.Jump(true);
+            Jump();
             StateMachine.ChangeState(JumpState);
         }
     }
+#endregion
+
+#region Animation and Sprite
+    public override void ChangeAnimation(int animationHash){
+        Animation.ChangeAnimation(animationHash);
+    }
+
+    public override void HandleSpriteFlip(){
+        if (Inputs.Move.x == 1){
+            Animation.Renderer.flipX = false;
+        }
+
+        if (Inputs.Move.x == -1){
+            Animation.Renderer.flipX = true;
+        }
+    }
+#endregion
 }

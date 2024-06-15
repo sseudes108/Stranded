@@ -9,6 +9,10 @@ public class PlayerIdle : IdleState {
         if (Player.Inputs.Move.x != 0){
             Player.ChangeState(Player.RunState);
         }
+
+        if (Player.Inputs.Shot){
+            Player.ChangeState(Player.StandShoot);
+        }
     }
 
     public override string ToString(){

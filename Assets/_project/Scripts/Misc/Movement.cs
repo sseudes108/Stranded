@@ -43,4 +43,8 @@ public class Movement : MonoBehaviour {
         Body.AddForce(new Vector2(0,_jumpForce), ForceMode2D.Impulse);
         _jump = false;
     }
+
+    public void StopJumpForce(){
+        Body.velocity = new Vector2(0,0);
+    }
 }

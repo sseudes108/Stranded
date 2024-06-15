@@ -1,25 +1,25 @@
 using UnityEngine;
 
 public class StateMachine : MonoBehaviour {
-    public Abstract _currentState;
+    public Abstract CurrentState { get; private set; }
 
     public IdleState IdleState { get; private set; }
     public RunState RunState { get; private set; }
     public JumpState JumpState { get; private set; }
 
     public void ChangeState (Abstract newState){
-        _currentState?.ExitState();
-        _currentState = newState;
+        CurrentState?.ExitState();
+        CurrentState = newState;
 
-        if(_currentState.Controller == null){
-            _currentState.SetController(GetComponent<MachineController>());
+        if(CurrentState.Controller == null){
+            CurrentState.SetController(GetComponent<MachineController>());
         }
 
-        _currentState.EnterState();
+        CurrentState.EnterState();
     }
 
     private void Update() {
-        _currentState.LogicUpdate();
+        CurrentState.LogicUpdate();
     }
 
     public void SetStates(StatesData states){
