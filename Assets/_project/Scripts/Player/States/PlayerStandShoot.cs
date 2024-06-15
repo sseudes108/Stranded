@@ -1,14 +1,13 @@
-using System.Collections;
+
 using UnityEngine;
 
 public class PlayerStandShoot : Abstract{
-    private IEnumerator _routine;
+
+    private float _wait;
+
     public override void EnterState(){
-        if(_routine != null){
-            Player.StopCoroutine(_routine);
-        }
-        _routine = ExitStandShoot();
-        Player.StartCoroutine(_routine);
+        Player.ChangeAnimation(Player.STAND_SHOOT);
+        _wait = 0.5f;
     }
 
     public override void ExitState(){
@@ -16,22 +15,23 @@ public class PlayerStandShoot : Abstract{
     }
 
     public override void LogicUpdate(){
-
+        HandleShot();
     }
 
     public override void PhysicsUpdate(){
 
     }
 
-    private IEnumerator ExitStandShoot(){
-        Player.ChangeAnimation(Player.STAND_SHOOT );
-        yield return new WaitForSeconds(0.5f);
+    private void HandleShot(){
+        _wait -= Time.deltaTime;
 
         if (Player.Inputs.Shot){
-            Player.ChangeState(Player.StandShoot);
+            _wait = 0.5f;
         }
-        
-        yield return null;
+
+        if (_wait <= 0){
+            Player.ChangeState(Player.IdleState);
+        }
     }
 
     public override string ToString(){

@@ -1,6 +1,11 @@
+using UnityEngine;
+
 public class PlayerRun : RunState {
+    private float _wait;
+
     public override void EnterState(){
         Player.ChangeAnimation(Player.RUN);
+        _wait = 0.5f;
     }
 
     public override void LogicUpdate(){
@@ -10,14 +15,26 @@ public class PlayerRun : RunState {
             Player.ChangeState(Player.JumpState);
         }
 
-        if (Player.Inputs.Shot){
-            Player.ChangeAnimation(Player.RUN_SHOOT);
-        }
+        HandleShot();
 
         if (Player.Inputs.Move.x != 0){
             Player.HandleMovement(Player.Inputs.Move.x);
-        }else{
+        }
+        else{
             Player.ChangeState(Player.IdleState);
+        }
+    }
+
+    private void HandleShot(){
+        _wait -= Time.deltaTime;
+
+        if (Player.Inputs.Shot){
+            Player.ChangeAnimation(Player.RUN_SHOOT);
+            _wait = 0.5f;
+        }
+
+        if (_wait <= 0){
+            Player.ChangeAnimation(Player.RUN);
         }
     }
 

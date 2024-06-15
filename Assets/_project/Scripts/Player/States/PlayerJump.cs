@@ -1,6 +1,4 @@
 
-using UnityEngine;
-
 public class PlayerJump : JumpState {
     bool _canDoubleJump = true;
     public override void EnterState(){

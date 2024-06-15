@@ -5,12 +5,17 @@ public class Player : MachineController {
     public FrameInput Inputs => _playerInputs.Input;
     public Movement Movement {get; private set;}
 
+    private float wait = 0.5f;
+
+    public FrameInput FRINPUT;
+
 #region State Machine
     public StateMachine StateMachine {get; private set;}
     public IdleState IdleState => StateMachine.IdleState;
     public RunState RunState => StateMachine.RunState;
     public JumpState JumpState => StateMachine.JumpState;
-    public PlayerStandShoot StandShoot;
+    public PlayerStandShoot StandShoot {get; private set;}
+    public BallMode BallMode {get; private set;}
 #endregion
 
 #region Animation
@@ -44,11 +49,13 @@ public class Player : MachineController {
     private void Update() {
         Testing.Instance.UpdateGrounded(IsGrounded());
         HandleSpriteFlip();
+        FRINPUT = Inputs;
     }
 
 #region State Machine
     private void CreateStates(){
         StandShoot = new();
+        BallMode = new();
 
         StateMachine.SetStates(new StatesData{
             Idle = new PlayerIdle(),
@@ -105,4 +112,31 @@ public class Player : MachineController {
         }
     }
 #endregion
+
+    public void HandleChangeMode(){
+        if (Inputs.Move.y == 1){
+            wait -= Time.deltaTime;
+        }else if (Inputs.Move.y == -1){
+            wait -= Time.deltaTime;
+        }else {
+            wait = 0.5f;
+        }
+
+        if (wait <= 0){
+            if (Inputs.Move.x == 1){
+                if (StateMachine.CurrentState is IdleState){
+                    ChangeState(BallMode);
+                }
+            }else if (Inputs.Move.x == -1){
+                if (StateMachine.CurrentState is BallMode){
+                    if (IsGrounded()){
+                        ChangeState(IdleState);
+                    }else{
+                        ChangeState(JumpState);
+                    }
+                }
+            }
+        }
+    }
+
 }

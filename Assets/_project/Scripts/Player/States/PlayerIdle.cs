@@ -6,6 +6,8 @@ public class PlayerIdle : IdleState {
 
     public override void LogicUpdate(){
         Player.HandleJump();
+        Player.HandleChangeMode();
+        
         if (Player.Inputs.Move.x != 0){
             Player.ChangeState(Player.RunState);
         }
