@@ -5,9 +5,9 @@ public class Player : MachineController {
     public FrameInput Inputs => _playerInputs.Input;
     public Movement Movement {get; private set;}
 
-    private float wait = 0.5f;
-
-    public FrameInput FRINPUT;
+    [SerializeField] private Transform _standMode, _ballMode;
+    public Transform BallForm => _ballMode;
+    public Transform StandForm => _standMode;
 
 #region State Machine
     public StateMachine StateMachine {get; private set;}
@@ -27,6 +27,7 @@ public class Player : MachineController {
     public readonly int JUMP = Animator.StringToHash("Player_Jump");
     public readonly int DOUBLEJUMP = Animator.StringToHash("Player_DoubleJump");
     public readonly int BALLMODE = Animator.StringToHash("Player_BallMode");
+    public readonly int BALLMODE_MOVE = Animator.StringToHash("Player_BallMode_Move");
 #endregion
 
 #region Ground Check
@@ -49,7 +50,6 @@ public class Player : MachineController {
     private void Update() {
         Testing.Instance.UpdateGrounded(IsGrounded());
         HandleSpriteFlip();
-        FRINPUT = Inputs;
     }
 
 #region State Machine
@@ -92,7 +92,9 @@ public class Player : MachineController {
     public override void HandleJump(){
         if (Inputs.Jump && IsGrounded()){
             Jump();
-            StateMachine.ChangeState(JumpState);
+            if (StateMachine.CurrentState != BallMode){
+                StateMachine.ChangeState(JumpState);
+            }
         }
     }
 #endregion
@@ -112,31 +114,5 @@ public class Player : MachineController {
         }
     }
 #endregion
-
-    public void HandleChangeMode(){
-        if (Inputs.Move.y == 1){
-            wait -= Time.deltaTime;
-        }else if (Inputs.Move.y == -1){
-            wait -= Time.deltaTime;
-        }else {
-            wait = 0.5f;
-        }
-
-        if (wait <= 0){
-            if (Inputs.Move.x == 1){
-                if (StateMachine.CurrentState is IdleState){
-                    ChangeState(BallMode);
-                }
-            }else if (Inputs.Move.x == -1){
-                if (StateMachine.CurrentState is BallMode){
-                    if (IsGrounded()){
-                        ChangeState(IdleState);
-                    }else{
-                        ChangeState(JumpState);
-                    }
-                }
-            }
-        }
-    }
 
 }
