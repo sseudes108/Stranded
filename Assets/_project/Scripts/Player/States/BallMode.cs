@@ -14,6 +14,10 @@ public class BallMode : Abstract{
         Player.HandleJump();
         Player.HandleMovement(Player.Inputs.Move.x);
 
+        if (Player.Inputs.Shot){
+            Player.Weapon.DropBomb();
+        }
+
         if (Player.IsGrounded()){
             if (Player.Inputs.Move.y == 1){
                 _changeCounterMode -= Time.deltaTime;
