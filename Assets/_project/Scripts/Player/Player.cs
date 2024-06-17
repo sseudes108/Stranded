@@ -4,6 +4,8 @@ public class Player : MachineController {
     private PlayerInputs _playerInputs;
     public FrameInput Inputs => _playerInputs.Input;
     public Movement Movement {get; private set;}
+    public Weapon Weapon {get; private set;}
+    public Transform FirePoint, JumpFirePoint;
 
     [SerializeField] private Transform _standMode, _ballMode;
     public Transform BallForm => _ballMode;
@@ -38,8 +40,9 @@ public class Player : MachineController {
     private void Awake() {
         Animation = GetComponent<Anim>();
         Movement = GetComponent<Movement>();
-        _playerInputs = GetComponent<PlayerInputs>();
         StateMachine = GetComponent<StateMachine>();
+        Weapon = GetComponent<Weapon>();
+        _playerInputs = GetComponent<PlayerInputs>();
     }
 
     private void Start() {
@@ -106,13 +109,24 @@ public class Player : MachineController {
 
     public override void HandleSpriteFlip(){
         if (Inputs.Move.x == 1){
-            Animation.Renderer.flipX = false;
+            transform.localScale = new Vector3(1, 1, 1);
         }
 
         if (Inputs.Move.x == -1){
-            Animation.Renderer.flipX = true;
+            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 #endregion
 
+    public void HandleShoot(){
+        Vector2 firePoint;
+
+        if (StateMachine.CurrentState == JumpState){
+            firePoint = JumpFirePoint.position;
+        }else{
+            firePoint = FirePoint.position;
+        }
+        
+        Weapon.Shoot(transform.localScale.x, firePoint);
+    }
 }

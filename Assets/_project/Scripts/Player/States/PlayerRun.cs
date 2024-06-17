@@ -29,6 +29,7 @@ public class PlayerRun : RunState {
         _wait -= Time.deltaTime;
 
         if (Player.Inputs.Shot){
+            Player.HandleShoot();
             Player.ChangeAnimation(Player.RUN_SHOOT);
             _wait = 0.5f;
         }

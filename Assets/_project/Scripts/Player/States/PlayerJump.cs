@@ -8,6 +8,12 @@ public class PlayerJump : JumpState {
     public override void LogicUpdate(){
         Player.HandleMovement(Player.Inputs.Move.x);
 
+        if (_canDoubleJump){
+            if (Player.Inputs.Shot){
+                Player.HandleShoot();
+            }
+        }
+
         if (Player.Inputs.Jump && _canDoubleJump){
             Player.Movement.StopJumpForce();
             Player.Jump();

@@ -3,7 +3,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour {
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpForce;
-    public Rigidbody2D Body;
+    public Rigidbody2D Body {get; private set;}
     private float _direction;
 
     private bool _canMove = true;
