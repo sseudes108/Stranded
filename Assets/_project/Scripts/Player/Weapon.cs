@@ -3,58 +3,35 @@ using UnityEngine.Pool;
 
 public class Weapon : MonoBehaviour {
     private ObjectPool<Bullet> _bulletPool;
-    public Bullet _bulletPrefab;
+    [SerializeField] private Bullet _bulletPrefab;
 
     private ObjectPool<Bomb> _bombPool;
-    public Bomb _bombPrefab;
+    [SerializeField] private Bomb _bombPrefab;
+
     private void Awake() {
-        CreateBulletPool();
-        CreateBombPool();
+        _bulletPool = GameManager.Instance.CreatePool(_bulletPrefab);
+        _bombPool = GameManager.Instance.CreatePool(_bombPrefab);
     }
 
-#region Bullet
+    public void ReleaseFromWeaponPool(MonoBehaviour obj){
+        if (obj is Bullet){
+            _bulletPool.Release(obj as Bullet);
+            return;
+        }
+
+        if (obj is Bomb){
+            _bombPool.Release(obj as Bomb);
+            return;
+        }
+    }
+
     public void Shoot(float direction, Vector2 firePoint){
         Bullet newBullet = _bulletPool.Get();
         newBullet.Init(direction, firePoint, this);
     }
 
-    private void CreateBulletPool(){
-        _bulletPool = new ObjectPool<Bullet>(()=>{
-            return Instantiate(_bulletPrefab);
-        }, bullet =>{
-            bullet.gameObject.SetActive(true);
-        }, bullet =>{
-            bullet.gameObject.SetActive(false);
-        }, bullet =>{
-            Destroy(bullet);
-        }, false, 20, 40){
-        };
-    }
-
-    public void ReleaseBulletFromPool(Bullet bullet){
-        _bulletPool.Release(bullet);
-    }
-#endregion
-
-    public void DropBomb(){
+    public void DropBomb(Vector2 firePoint){
         Bomb newBomb = _bombPool.Get();
-        newBomb.Init(this);
-    }
-
-    private void CreateBombPool(){
-        _bombPool = new ObjectPool<Bomb>(()=>{
-            return Instantiate(_bombPrefab);
-        }, bomb =>{
-            bomb.gameObject.SetActive(true);
-        }, bomb =>{
-            bomb.gameObject.SetActive(false);
-        }, bomb =>{
-            Destroy(bomb);
-        }, false, 20, 40){
-        };
-    }
-
-    public void ReleaseBombFromPool(Bomb bomb){
-        _bombPool.Release(bomb);
+        newBomb.Init(firePoint, this);
     }
 }

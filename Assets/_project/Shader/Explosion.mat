@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bullet
+  m_Name: Explosion
   m_Shader: {fileID: -6465566751694194690, guid: 191e843ad226130449f54aa86a784e3b, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -40,10 +40,10 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _TIme: 1
+    - _TIme: 0
     m_Colors:
-    - _Color_1: {r: 23.968624, g: 10.588871, b: 1.512838, a: 1}
-    - _Color_2: {r: 23.96863, g: 22.29349, b: 14.793599, a: 1}
+    - _Color_1: {r: 95.87452, g: 0, b: 0, a: 0}
+    - _Color_2: {r: 128, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &2159869531172331514

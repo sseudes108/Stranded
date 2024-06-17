@@ -15,7 +15,7 @@ public class BallMode : Abstract{
         Player.HandleMovement(Player.Inputs.Move.x);
 
         if (Player.Inputs.Shot){
-            Player.Weapon.DropBomb();
+            Player.Weapon.DropBomb(Player.transform.position);
         }
 
         if (Player.IsGrounded()){

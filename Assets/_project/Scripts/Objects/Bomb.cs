@@ -3,24 +3,22 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour{
     private Weapon _gun;
-    public Transform _explosion;
 
-    public void Init(Weapon gun){
+    public void Init(Vector2 position, Weapon gun){
+        transform.position = position;
         _gun = gun;
+
+        StartCoroutine(ExplosionRoutine());
     }
 
-    private void Start() {
-        StartCoroutine(StartCountExplosion());
-    }
-
-    private IEnumerator StartCountExplosion(){
+    private IEnumerator ExplosionRoutine(){
         yield return new WaitForSeconds(1f);
         Explode();
         yield return null;
     }
 
     private void Explode(){
-        Instantiate(_explosion, transform.position, Quaternion.identity);
-        _gun.ReleaseBombFromPool(this);
+        GameManager.Instance.VFXManager.InstantiateExplosionVFX(transform.position);
+        _gun.ReleaseFromWeaponPool(this);
     }
 }
