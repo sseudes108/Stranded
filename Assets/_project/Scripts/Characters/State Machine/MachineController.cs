@@ -1,9 +1,39 @@
 using UnityEngine;
 
 public abstract class MachineController : MonoBehaviour {
-    public abstract void ChangeState(Abstract newState);
-    public abstract void ChangeAnimation(int animationHash);
-    public abstract void HandleMovement(float direction);
+    public StateMachine StateMachine {get; private set;}
+    public Anim Animation  {get; private set;}
+    public Movement Movement {get; private set;}
+
+    public virtual void Awake() {
+        Animation = GetComponent<Anim>();
+        Movement = GetComponent<Movement>();
+        StateMachine = GetComponent<StateMachine>();
+    }
+
+    public virtual void Start() {
+        Debug.Log(this);
+        CreateStates();
+        StateMachine.ChangeState(StateMachine.IdleState);
+    }
+
+    public abstract void CreateStates();
+
+    public void ChangeState(Abstract newState){
+        if (this is Player){
+            Testing.Instance.UpdateState(newState);
+        }
+        StateMachine.ChangeState(newState);
+    }
+
+    public void ChangeAnimation(int animationHash){
+        Animation.ChangeAnimation(animationHash);
+    }
+
+    public void HandleMovement(float direction){
+        Movement.SetDirection(direction);
+    }
+
     public abstract void HandleJump();
     public abstract void HandleSpriteFlip();
 }

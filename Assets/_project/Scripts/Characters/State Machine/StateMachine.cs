@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour {
     public Abstract CurrentState { get; private set; }
-
     public IdleState IdleState { get; private set; }
     public RunState RunState { get; private set; }
     public JumpState JumpState { get; private set; }

@@ -12,11 +12,6 @@ public class DuckState : Abstract{
     public override void LogicUpdate(){
         if (!Player.Inputs.Crouch){
             Player.ChangeState(Player.IdleState);
-            // if(Player.Inputs.Shot){
-            //     Player.ChangeState(Player.StandShoot);
-            // }else{
-            //     Player.ChangeState(Player.IdleState);
-            // }
         }
 
         if (Player.Inputs.Shot){

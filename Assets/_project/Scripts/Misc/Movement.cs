@@ -47,4 +47,8 @@ public class Movement : MonoBehaviour {
     public void StopJumpForce(){
         Body.velocity = new Vector2(0,0);
     }
+
+    public float GetSpeed(){
+        return _moveSpeed;
+    }
 }

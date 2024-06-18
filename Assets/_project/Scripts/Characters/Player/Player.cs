@@ -3,7 +3,6 @@ using UnityEngine;
 public class Player : MachineController {
     private PlayerInputs _playerInputs;
     public FrameInput Inputs => _playerInputs.Input;
-    public Movement Movement {get; private set;}
 
 #region Weapon
     [Header("Fire Points")]
@@ -22,17 +21,15 @@ public class Player : MachineController {
 #endregion
 
 #region State Machine
-    public StateMachine StateMachine {get; private set;}
-    public IdleState IdleState => StateMachine.IdleState;
-    public RunState RunState => StateMachine.RunState;
-    public JumpState JumpState => StateMachine.JumpState;
     public PlayerStandShoot StandShoot {get; private set;}
     public BallMode BallMode {get; private set;}
     public DuckState DuckState {get; private set;}
+    public IdleState IdleState => StateMachine.IdleState;
+    public RunState RunState => StateMachine.RunState;
+    public JumpState JumpState => StateMachine.JumpState;
 #endregion
 
 #region Animation
-    public Anim Animation  {get; private set;}
     public readonly int IDLE = Animator.StringToHash("Player_Idle");
     public readonly int RUN = Animator.StringToHash("Player_Run");
     public readonly int RUN_SHOOT = Animator.StringToHash("Player_RunShoot");
@@ -51,17 +48,10 @@ public class Player : MachineController {
 #endregion
 
 #region Unity Methods
-    private void Awake() {
-        Animation = GetComponent<Anim>();
-        Movement = GetComponent<Movement>();
-        StateMachine = GetComponent<StateMachine>();
+    public override void Awake() {
+        base.Awake();
         Weapon = GetComponent<Weapon>();
         _playerInputs = GetComponent<PlayerInputs>();
-    }
-
-    private void Start() {
-        CreateStates();
-        StateMachine.ChangeState(StateMachine.IdleState);
     }
 
     private void Update() {
@@ -71,7 +61,7 @@ public class Player : MachineController {
 #endregion
 
 #region State Machine
-    private void CreateStates(){
+    public override void CreateStates(){
         StandShoot = new();
         BallMode = new();
         DuckState = new();
@@ -82,11 +72,6 @@ public class Player : MachineController {
             Jump = new PlayerJump(),
         });
     }
-
-    public override void ChangeState(Abstract newState){
-        Testing.Instance.UpdateState(newState);
-        StateMachine.ChangeState(newState);
-    }
 #endregion
 
 #region Movement, Jump and Ground Check
@@ -95,13 +80,9 @@ public class Player : MachineController {
         return isGrounded;
     }
 
-    private void OnDrawGizmos() {
+    private void OnDrawGizmos(){
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(GroundCheckBox.position, _groundBoxSize);
-    }
-
-    public override void HandleMovement(float direction){
-        Movement.SetDirection(direction);
     }
 
     public void Jump(){
@@ -119,21 +100,17 @@ public class Player : MachineController {
 #endregion
 
 #region Animation and Sprite
-    public override void ChangeAnimation(int animationHash){
-        Animation.ChangeAnimation(animationHash);
-    }
-
     public override void HandleSpriteFlip(){
         if (Inputs.Move.x == 1){
             transform.localScale = new Vector3(1, 1, 1);
         }
-
         if (Inputs.Move.x == -1){
             transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 #endregion
 
+#region Shoot
     public void HandleShoot(){
         Vector2 firePoint;
         Abstract currentState = StateMachine.CurrentState;
@@ -148,4 +125,6 @@ public class Player : MachineController {
         
         Weapon.Shoot(transform.localScale.x, firePoint);
     }
+#endregion
+
 }
