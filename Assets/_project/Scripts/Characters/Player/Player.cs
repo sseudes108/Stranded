@@ -4,12 +4,22 @@ public class Player : MachineController {
     private PlayerInputs _playerInputs;
     public FrameInput Inputs => _playerInputs.Input;
     public Movement Movement {get; private set;}
-    public Weapon Weapon {get; private set;}
-    public Transform FirePoint, JumpFirePoint;
 
-    [SerializeField] private Transform _standMode, _ballMode;
+#region Weapon
+    [Header("Fire Points")]
+    public Transform StandFirePoint;
+    public Transform JumpFirePoint, DuckFirePoint;
+    public Weapon Weapon {get; private set;}
+#endregion
+
+#region Modes
+    [Header("Modes")]
+    [SerializeField] private Transform _standMode;
+    [SerializeField] private Transform _ballMode, _duckMode;
     public Transform BallForm => _ballMode;
     public Transform StandForm => _standMode;
+    public Transform DuckMode => _duckMode;
+#endregion
 
 #region State Machine
     public StateMachine StateMachine {get; private set;}
@@ -18,6 +28,7 @@ public class Player : MachineController {
     public JumpState JumpState => StateMachine.JumpState;
     public PlayerStandShoot StandShoot {get; private set;}
     public BallMode BallMode {get; private set;}
+    public DuckState DuckState {get; private set;}
 #endregion
 
 #region Animation
@@ -26,6 +37,7 @@ public class Player : MachineController {
     public readonly int RUN = Animator.StringToHash("Player_Run");
     public readonly int RUN_SHOOT = Animator.StringToHash("Player_RunShoot");
     public readonly int STAND_SHOOT = Animator.StringToHash("Player_StandShoot");
+    public readonly int DUCK = Animator.StringToHash("Player_Duck");
     public readonly int JUMP = Animator.StringToHash("Player_Jump");
     public readonly int DOUBLEJUMP = Animator.StringToHash("Player_DoubleJump");
     public readonly int BALLMODE = Animator.StringToHash("Player_BallMode");
@@ -33,10 +45,12 @@ public class Player : MachineController {
 #endregion
 
 #region Ground Check
-    [SerializeField] private Transform _groundCheckBox;
+    [Header("Ground Check")]
+    public Transform GroundCheckBox;
     [SerializeField] private Vector2 _groundBoxSize;
 #endregion
 
+#region Unity Methods
     private void Awake() {
         Animation = GetComponent<Anim>();
         Movement = GetComponent<Movement>();
@@ -54,11 +68,13 @@ public class Player : MachineController {
         Testing.Instance.UpdateGrounded(IsGrounded());
         HandleSpriteFlip();
     }
+#endregion
 
 #region State Machine
     private void CreateStates(){
         StandShoot = new();
         BallMode = new();
+        DuckState = new();
 
         StateMachine.SetStates(new StatesData{
             Idle = new PlayerIdle(),
@@ -75,13 +91,13 @@ public class Player : MachineController {
 
 #region Movement, Jump and Ground Check
     public bool IsGrounded(){
-        Collider2D isGrounded = Physics2D.OverlapBox(_groundCheckBox.position, _groundBoxSize, 0, LayerMask.GetMask("Ground"));
+        Collider2D isGrounded = Physics2D.OverlapBox(GroundCheckBox.position, _groundBoxSize, 0, LayerMask.GetMask("Ground"));
         return isGrounded;
     }
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(_groundCheckBox.position, _groundBoxSize);
+        Gizmos.DrawWireCube(GroundCheckBox.position, _groundBoxSize);
     }
 
     public override void HandleMovement(float direction){
@@ -120,11 +136,14 @@ public class Player : MachineController {
 
     public void HandleShoot(){
         Vector2 firePoint;
+        Abstract currentState = StateMachine.CurrentState;
 
-        if (StateMachine.CurrentState == JumpState){
+        if (currentState == JumpState){
             firePoint = JumpFirePoint.position;
+        }else if (currentState == DuckState){
+            firePoint = DuckFirePoint.position;
         }else{
-            firePoint = FirePoint.position;
+            firePoint = StandFirePoint.position;
         }
         
         Weapon.Shoot(transform.localScale.x, firePoint);

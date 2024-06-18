@@ -11,5 +11,4 @@ public class VFXManager : MonoBehaviour {
     public void InstantiateExplosionVFX(Vector2 position){
         Instantiate(_explosion, position, Quaternion.identity);
     }
-
 }

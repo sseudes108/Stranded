@@ -4,6 +4,7 @@ using UnityEngine;
 public class BallMode : Abstract{
     float _changeCounterMode = 0.5f;
     public override void EnterState(){
+        Player.GroundCheckBox.localPosition = new Vector3(0, -0.37f, 0);
         Player.StandForm.gameObject.SetActive(false);
         Player.BallForm.gameObject.SetActive(true);
 
@@ -47,6 +48,7 @@ public class BallMode : Abstract{
     }
 
     public override void ExitState(){
+        Player.GroundCheckBox.localPosition = new Vector3(0, -1.11f, 0);
         Player.BallForm.gameObject.SetActive(false);
         Player.StandForm.gameObject.SetActive(true);
     }

@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour {
             Destroy(newObject);
         }, false, 20, 40){
         };
-
         return objectPool;
     }
 
