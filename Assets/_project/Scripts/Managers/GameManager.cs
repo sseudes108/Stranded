@@ -6,11 +6,7 @@ public class GameManager : MonoBehaviour {
     public VFXManager VFXManager {get; private set;}
     
     private void Awake() {
-        if (Instance != null){
-            Debug.LogError("More than one instance of GameManager.cs");
-        }
-        Instance = this;
-
+        SetInstance();
         SetManagers();
     }
 
@@ -28,6 +24,13 @@ public class GameManager : MonoBehaviour {
         return objectPool;
     }
 
+    private void SetInstance(){
+        if (Instance != null){
+            Debug.LogError("More than one instance of GameManager.cs");
+        }
+        Instance = this;
+    }
+    
     private void SetManagers(){
         VFXManager = GetComponent<VFXManager>();
     }

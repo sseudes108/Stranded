@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour{
     private Weapon _gun;
+    [SerializeField] private Transform _explosion;
 
     public void Init(Vector2 position, Weapon gun){
         transform.position = position;
@@ -18,7 +19,7 @@ public class Bomb : MonoBehaviour{
     }
 
     private void Explode(){
-        GameManager.Instance.VFXManager.InstantiateExplosionVFX(transform.position);
-        _gun.ReleaseFromWeaponPool(this);
+        GameManager.Instance.VFXManager.InstantiateVFX(_explosion, transform.position);
+        _gun.ReleaseFromPool(this);
     }
 }

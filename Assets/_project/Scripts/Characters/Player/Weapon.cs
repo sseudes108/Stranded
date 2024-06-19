@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour {
         _bombPool = GameManager.Instance.CreatePool(_bombPrefab);
     }
 
-    public void ReleaseFromWeaponPool(MonoBehaviour obj){
+    public void ReleaseFromPool(MonoBehaviour obj){
         if (obj is Bullet){
             _bulletPool.Release(obj as Bullet);
             return;
