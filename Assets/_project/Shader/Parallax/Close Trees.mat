@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2104647228993119358
+--- !u!114 &-8043359762823823560
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FG_Trees
+  m_Name: Close Trees
   m_Shader: {fileID: -6465566751694194690, guid: 278f569e4feb0864da14a3fb08a76fe5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -54,10 +54,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Parallax_Amount: 0.05
-    - _Parallax_Speed: 0.05
+    - _Amount: 0.2
+    - _Speed: 0.01
     m_Colors:
-    - _Parallax_Direction: {r: 1, g: 0, b: 0, a: 0}
+    - _Direction: {r: 1, g: 0, b: 0, a: 0}
     - _Tilling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
