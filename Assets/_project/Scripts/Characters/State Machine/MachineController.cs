@@ -4,15 +4,16 @@ public abstract class MachineController : MonoBehaviour {
     public StateMachine StateMachine {get; private set;}
     public Anim Animation  {get; private set;}
     public Movement Movement {get; private set;}
+    public Knockback Knockback {get; private set;}
 
     public virtual void Awake() {
         Animation = GetComponent<Anim>();
         Movement = GetComponent<Movement>();
+        Knockback = GetComponent<Knockback>();
         StateMachine = GetComponent<StateMachine>();
     }
 
     public virtual void Start() {
-        Debug.Log(this);
         CreateStates();
         StateMachine.ChangeState(StateMachine.IdleState);
     }

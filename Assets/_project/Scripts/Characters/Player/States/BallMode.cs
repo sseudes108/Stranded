@@ -42,13 +42,15 @@ public class BallMode : Abstract{
         }
     }
 
-    public override void PhysicsUpdate(){
-        
-    }
+    public override void PhysicsUpdate(){}
 
     public override void ExitState(){
         Player.GroundCheckBox.localPosition = new Vector3(0, -1.11f, 0);
         Player.BallForm.gameObject.SetActive(false);
         Player.StandForm.gameObject.SetActive(true);
+    }
+
+    public override string ToString(){
+        return "Ball Mode";
     }
 }

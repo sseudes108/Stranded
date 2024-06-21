@@ -5,6 +5,7 @@ public class StateMachine : MonoBehaviour {
     public IdleState IdleState { get; private set; }
     public RunState RunState { get; private set; }
     public JumpState JumpState { get; private set; }
+    public HurtState HurtState { get; private set; }
 
     public void ChangeState (Abstract newState){
         CurrentState?.ExitState();
@@ -25,5 +26,6 @@ public class StateMachine : MonoBehaviour {
         IdleState = states.Idle;
         RunState = states.Run;
         JumpState = states.Jump;
+        HurtState = states.Hurt;
     }
 }

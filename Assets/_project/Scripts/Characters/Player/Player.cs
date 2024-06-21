@@ -24,6 +24,7 @@ public class Player : MachineController {
     public PlayerStandShoot StandShoot {get; private set;}
     public BallMode BallMode {get; private set;}
     public DuckState DuckState {get; private set;}
+    public HurtState HurtState => StateMachine.HurtState;
     public IdleState IdleState => StateMachine.IdleState;
     public RunState RunState => StateMachine.RunState;
     public JumpState JumpState => StateMachine.JumpState;
@@ -36,6 +37,7 @@ public class Player : MachineController {
     public readonly int STAND_SHOOT = Animator.StringToHash("Player_StandShoot");
     public readonly int DUCK = Animator.StringToHash("Player_Duck");
     public readonly int JUMP = Animator.StringToHash("Player_Jump");
+    public readonly int HURT = Animator.StringToHash("Player_Hurt");
     public readonly int DOUBLEJUMP = Animator.StringToHash("Player_DoubleJump");
     public readonly int BALLMODE = Animator.StringToHash("Player_BallMode");
     public readonly int BALLMODE_MOVE = Animator.StringToHash("Player_BallMode_Move");
@@ -70,6 +72,7 @@ public class Player : MachineController {
             Idle = new PlayerIdle(),
             Run = new PlayerRun(),
             Jump = new PlayerJump(),
+            Hurt = new PlayerHurt(),
         });
     }
 #endregion

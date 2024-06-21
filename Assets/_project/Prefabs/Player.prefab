@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3973761267343015770}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Jump FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2068923400537322563}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Stand Fire Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7531677428888327058}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Duck FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3490724625868760780}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground Check Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6098857096421633273}
   - component: {fileID: 2321120710849460829}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BallMode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +359,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7595979445701493558}
   - component: {fileID: 5646409150661178337}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DuckMode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 1550925980221235259}
   - component: {fileID: 133933930432532026}
   - component: {fileID: 1607329957912280}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +538,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1145202717308229559}
   - component: {fileID: 8768303723902720172}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StandMode
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -9,7 +9,7 @@ public class Crab : MachineController{
 
     [SerializeField] private Transform _aggroCheckBox;
     [SerializeField] private Vector2 _aggroCheckSize;
-    public Player Player;
+    public Player Target;
 
     public readonly int MOVE = Animator.StringToHash("Crab_Move");
     public readonly int IDLE = Animator.StringToHash("Crab_Idle");
@@ -34,14 +34,20 @@ public class Crab : MachineController{
             Idle = new CrabIdle(),
             Run = new CrabRun(),
             Jump = new CrabJump(),
+            Hurt = new CrabHurt(),
         });
+    }
+
+    public void FlipSpriteDirection(int direction){
+        if (direction == 1){
+            transform.localScale = new Vector3(-1, 1, 1);
+        }if (direction == -1){
+            transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 
     public bool CheckTarget(){
         Collider2D chase = Physics2D.OverlapBox(_aggroCheckBox.position, _aggroCheckSize, 0, LayerMask.GetMask("Player"));
-        if(chase){
-            Debug.Log("Chase");
-        }
         return chase;
     }
 
