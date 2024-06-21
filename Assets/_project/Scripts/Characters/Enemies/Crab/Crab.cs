@@ -5,6 +5,12 @@ public class Crab : MachineController{
     public IdleState Idle => StateMachine.IdleState;
     public RunState Run => StateMachine.RunState;
     public JumpState Jump => StateMachine.JumpState;
+    public PatrolPoint[] PatrolPoints;
+
+    public override void Awake() {
+        base.Awake();
+        PatrolPoints = GetComponentsInChildren<PatrolPoint>();
+    }
 
     public override void HandleJump(){
 

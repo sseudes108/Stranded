@@ -2,8 +2,8 @@ using System.Collections;
 using UnityEngine;
 
 public class CrabPatrol : Abstract{
-
     public override void EnterState(){
+
     }
 
     public override void LogicUpdate(){
@@ -11,8 +11,9 @@ public class CrabPatrol : Abstract{
     }
 
     public override void PhysicsUpdate(){
-
+        
     }
+
     public override void ExitState(){
 
     }

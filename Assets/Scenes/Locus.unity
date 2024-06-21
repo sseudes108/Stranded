@@ -205,6 +205,68 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1532621175}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &555990000
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7315460485308405658}
+    m_Modifications:
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294386122396510785, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_Name
+      value: Patrol Point
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+--- !u!4 &555990001 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+  m_PrefabInstance: {fileID: 555990000}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &578382895
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,6 +1007,68 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &601967985
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7315460485308405658}
+    m_Modifications:
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294386122396510785, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+      propertyPath: m_Name
+      value: 'Patrol Point '
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+--- !u!4 &601967986 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4842094340096933515, guid: 8dbba6d689e3ea9419fb14a07d5d2f69, type: 3}
+  m_PrefabInstance: {fileID: 601967985}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &655878091
 GameObject:
   m_ObjectHideFlags: 0
@@ -4215,6 +4339,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2146894744870958310}
+  - {fileID: 555990001}
+  - {fileID: 601967986}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &7315460485308405659
@@ -4356,6 +4482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 026ef4a7e4e09fd4a8b7601cc2523ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  patrolPoints: []
 --- !u!114 &7315460485308405665
 MonoBehaviour:
   m_ObjectHideFlags: 0
