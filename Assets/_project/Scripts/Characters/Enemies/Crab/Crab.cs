@@ -9,7 +9,7 @@ public class Crab : MachineController{
 
     [SerializeField] private Transform _aggroCheckBox;
     [SerializeField] private Vector2 _aggroCheckSize;
-    public Player Target;
+    // public Player Target;
 
     public readonly int MOVE = Animator.StringToHash("Crab_Move");
     public readonly int IDLE = Animator.StringToHash("Crab_Idle");

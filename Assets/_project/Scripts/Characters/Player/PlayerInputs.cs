@@ -8,6 +8,8 @@ public class PlayerInputs : MonoBehaviour{
     private InputSystem_Actions _inputSystem;
     private InputAction _move, _jump, _shot, _crouch;
 
+    private bool _allowInputs = true;
+
     private void OnEnable() {
         _inputSystem.Enable();
     }
@@ -24,6 +26,7 @@ public class PlayerInputs : MonoBehaviour{
     }
 
     private void Update() {
+        if(!_allowInputs){return;}
         _frameInput = GatherInput();
     }
 
@@ -34,6 +37,10 @@ public class PlayerInputs : MonoBehaviour{
             Shot = _shot.WasPressedThisFrame(),
             Crouch = _crouch.IsPressed(),
         };
+    }
+
+    public void AllowInputs(bool allowInputs){
+        _allowInputs = allowInputs;
     }
 
 }

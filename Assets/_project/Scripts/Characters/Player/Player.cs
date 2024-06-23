@@ -1,8 +1,8 @@
 using UnityEngine;
 
 public class Player : MachineController {
-    private PlayerInputs _playerInputs;
-    public FrameInput Inputs => _playerInputs.Input;
+    public PlayerInputs PlayerInputs {get; private set;}
+    public FrameInput Inputs => PlayerInputs.Input;
 
 #region Weapon
     [Header("Fire Points")]
@@ -53,7 +53,7 @@ public class Player : MachineController {
     public override void Awake() {
         base.Awake();
         Weapon = GetComponent<Weapon>();
-        _playerInputs = GetComponent<PlayerInputs>();
+        PlayerInputs = GetComponent<PlayerInputs>();
     }
 
     private void Update() {

@@ -75,18 +75,19 @@ public class CrabPatrol : Abstract{
 
 //Chase
 public class CrabRun : RunState{
+    Player _target;
     public override void EnterState(){
-        Crab.Target = Crab.FindAnyObjectByType<Player>();
+        _target = Crab.FindAnyObjectByType<Player>();
     }
     public override void LogicUpdate(){
         if(!Crab.CheckTarget()){
-            Crab.Target = null;
+            _target = null;
             Crab.ChangeState(Crab.Idle);
             return;
         }
 
-        if (Vector3.Distance(Crab.transform.position, Crab.Target.transform.position) > 1f){
-                if (Crab.Movement.Body.transform.position.x < Crab.Target.transform.position.x){
+        if (Vector3.Distance(Crab.transform.position, _target.transform.position) > 1.4f){
+                if (Crab.Movement.Body.transform.position.x < _target.transform.position.x){
                     Crab.Movement.SetDirection(1f);
                     Crab.FlipSpriteDirection(1);
                 }else{
@@ -100,11 +101,8 @@ public class CrabRun : RunState{
                 Crab.ChangeAnimation(Crab.MOVE);
             }else{
                 Crab.Movement.SetDirection(0);
-                Crab.Target.Knockback.ApplyKnockBackForce(Crab.Target, Crab.Movement.Body.transform.position);
-                if (Crab.Animation.CurrentAnimation == Crab.IDLE){
-                    return;
-                }
                 Crab.ChangeAnimation(Crab.IDLE);
+                _target.GetComponent<Knockback>().ApplyKnockBackForce(_target, Crab.Movement.transform.position);
             }
     }
     public override void PhysicsUpdate(){}
